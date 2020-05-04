@@ -1,0 +1,14 @@
+extends layout
+
+
+block content
+  h1=title
+  
+  - list_genres.sort(function(a,b){return a.name > b.name ? 1 : (a.name<b.name) ? -1 : 0})
+  ul
+    each genre in list_genres
+      li
+        a(href=genre.url) #{genre.name}
+
+    else
+      li There are no genres
