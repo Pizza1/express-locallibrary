@@ -13,10 +13,14 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var wikiRouter = require('./routes/wiki');
 var catalogRouter = require('./routes/catalog');
-
+var compression = require('compression');
+var helmet = require('helmet');
 
 
 var app = express();
+
+app.use(compression());
+app.use(helmet());
 var mongoose = require('mongoose');
 var mongoDBserv = `mongodb+srv://user1:EXXlu1d6fOIrat4T@cluster0-zvqun.azure.mongodb.net/local_library?retryWrites=true&w=majority`;
 mongoose.connect(mongoDBserv, {useNewUrlParser:true})
