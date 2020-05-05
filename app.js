@@ -22,7 +22,8 @@ var app = express();
 app.use(compression());
 app.use(helmet());
 var mongoose = require('mongoose');
-var mongoDBserv = `mongodb+srv://user1:EXXlu1d6fOIrat4T@cluster0-zvqun.azure.mongodb.net/local_library?retryWrites=true&w=majority`;
+dev_db_url = `mongodb+srv://user1:EXXlu1d6fOIrat4T@cluster0-zvqun.azure.mongodb.net/local_library?retryWrites=true&w=majority`;
+var mongoDBserv = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDBserv, {useNewUrlParser:true})
 var db = mongoose.connection; 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

@@ -1,3 +1,4 @@
+var debug = require('debug')('author');
 var Author = require('../models/author');
 var async = require('async');
 var Book = require('../models/book');
@@ -126,6 +127,7 @@ exports.author_delete_post = function(req, res){
 };
 
 exports.author_update_get = function(req, res, next){
+    //req.sanitize('id').escape.
     async.parallel({
         author: function(cb){
             Author
@@ -133,7 +135,9 @@ exports.author_update_get = function(req, res, next){
             .exec(cb);
         },
     }, function(err, results){
-        if(err) {return next(err);}
+        if(err) {
+            debug('update error:' + err);
+            return next(err);}
         res.render('author_form', {
             title: "Update Author: " + results.author.name,
             author:results.author,
